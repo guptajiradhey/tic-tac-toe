@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="50dp"
+            android:padding="5dp">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player1Score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Player 1 Score : 0"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:layout_weight="1" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player2Score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Player 2 Score : 0"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="30sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/btn00"
+                style="@style/style_img_button"/>
+
+            <ImageButton
+                android:id="@+id/btn01"
+                style="@style/style_img_button" />
+
+            <ImageButton
+                android:id="@+id/btn02"
+                style="@style/style_img_button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/btn10"
+                style="@style/style_img_button"/>
+
+            <ImageButton
+                android:id="@+id/btn11"
+                style="@style/style_img_button" />
+
+            <ImageButton
+                android:id="@+id/btn12"
+                style="@style/style_img_button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/btn20"
+                style="@style/style_img_button" />
+
+            <ImageButton
+                android:id="@+id/btn21"
+                style="@style/style_img_button" />
+
+            <ImageButton
+                android:id="@+id/btn22"
+                style="@style/style_img_button"/>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cornerRadius="3dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:padding="15dp"
+            android:text="Reset Game"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</layout>
