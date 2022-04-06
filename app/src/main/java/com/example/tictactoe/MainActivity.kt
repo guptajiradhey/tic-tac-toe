@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         mainViewModel=ViewModelProvider(this,MainViewModelFactory()).get(MainActivityViewModel::class.java)
-//        mainViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-
         mainViewModel.clearBoard.observe(this) {
             if (it) {
                 clearBoard()

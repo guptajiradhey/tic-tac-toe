@@ -9,13 +9,13 @@ import com.example.tictactoe.R
 import com.example.tictactoe.enums.GameStatus
 
 class MainActivityViewModel : ViewModel() {
-   private var valueFields: Array<Array<Char?>>
-   private var playerTurn: PlayerTurn = PlayerTurn.PLAYER_1
+    private var valueFields: Array<Array<Char?>>
+    private var playerTurn: PlayerTurn = PlayerTurn.PLAYER_1
     private var roundCount: Int = 0
-    private  var _player1Points= MutableLiveData<Int>(0)
-    private  var _player2Points= MutableLiveData<Int>(0)
+    private var _player1Points = MutableLiveData<Int>(0)
+    private var _player2Points = MutableLiveData<Int>(0)
     private val TOTAL_ROUNDS = 9
-    private  var _clearBorad= MutableLiveData<Boolean>(true)
+    private var _clearBorad = MutableLiveData<Boolean>(true)
     var _gameStatus = MutableLiveData<GameStatus>()
 
 
@@ -24,7 +24,7 @@ class MainActivityViewModel : ViewModel() {
             arrayOf(arrayOf(null, null, null), arrayOf(null, null, null), arrayOf(null, null, null))
     }
 
-     fun onImageButtonClicked(imageButton: ImageButton) {
+    fun onImageButtonClicked(imageButton: ImageButton) {
         if (imageButton.drawable != null) return
         val tag = imageButton.tag as Pair<*, *>
         when (playerTurn) {
@@ -117,7 +117,8 @@ class MainActivityViewModel : ViewModel() {
         _clearBorad.postValue(true)
         roundCount = 0
         playerTurn = PlayerTurn.PLAYER_1
-        valueFields = arrayOf(arrayOf(null, null, null), arrayOf(null, null, null), arrayOf(null, null, null))
+        valueFields =
+            arrayOf(arrayOf(null, null, null), arrayOf(null, null, null), arrayOf(null, null, null))
     }
 
 
