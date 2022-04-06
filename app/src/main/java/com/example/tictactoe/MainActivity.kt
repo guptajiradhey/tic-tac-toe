@@ -1,13 +1,8 @@
 package com.example.tictactoe
 
-import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import com.example.tictactoe.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
@@ -15,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var buttons: Array<Array<ImageButton>>
+    private  lateinit var valueFields:Array<Array<Char?>>
     private lateinit var binding: ActivityMainBinding
 
     private var playerTurn: PlayerTurn = PlayerTurn.PLAYER_1
@@ -30,6 +26,7 @@ class MainActivity : AppCompatActivity() {
                 initializeImageButton(row, column)
             }
         }
+        valueFields= arrayOf(arrayOf(null,null,null),arrayOf(null,null,null),arrayOf(null,null,null))
         binding.btnReset.setOnClickListener {
             player1Points = 0
             player2Points = 0
@@ -41,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private fun initializeImageButton(row: Int, column: Int): ImageButton {
         val btn: ImageButton =
             findViewById(resources.getIdentifier("btn$row$column", "id", packageName))
+        btn.tag=Pair(row,column)
         btn.setOnClickListener {
             onImageButtonClicked(btn)
         }
@@ -49,12 +47,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun onImageButtonClicked(imageButton: ImageButton) {
         if (imageButton.drawable != null) return
+             val tag=imageButton.tag as Pair<*, *>
         when (playerTurn) {
             PlayerTurn.PLAYER_1 -> {
                 imageButton.setImageResource(R.drawable.ic_cross)
+                valueFields[tag.first as Int][tag.second as Int]='x'
             }
             PlayerTurn.PLAYER_2 -> {
                 imageButton.setImageResource(R.drawable.ic_zero_green)
+                valueFields[tag.first as Int][tag.second as Int]='o'
             }
         }
         roundCount++
@@ -79,14 +80,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkForWin(): Boolean {
-        val fields = Array(3) { r ->
-            Array(3) { c ->
-                getField(buttons[r][c])
-            }
-        }
-        if (checkForRowWiseWin(fields)
-            || checkForColumnWiseWin(fields)
-            || checkForDiagonalWin(fields))
+
+        if (checkForRowWiseWin(valueFields)
+            || checkForColumnWiseWin(valueFields)
+            || checkForDiagonalWin(valueFields))
             return true
 
         return false
@@ -124,24 +121,9 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-    private fun getField(btn: ImageButton): Char? {
-        val drw: Drawable? = btn.drawable
-        val drwCross: Drawable? =
-            ResourcesCompat.getDrawable(resources, R.drawable.ic_cross, null)
-        val drwHeart: Drawable? =
-            ResourcesCompat.getDrawable(resources, R.drawable.ic_zero_green, null)
-
-        return when (drw?.constantState) {
-            drwCross?.constantState -> 'x'
-            drwHeart?.constantState -> 'o'
-            else -> null
-        }
-
-    }
 
     private fun winnerPlayer(player: Int) {
         if (player == 1) player1Points++ else player2Points++
-        Toast.makeText(applicationContext, "Player $player Won!", Toast.LENGTH_LONG).show()
         Snackbar.make(binding.root, "Player $player Won!", Snackbar.LENGTH_LONG).show()
         updateScore()
         clearBoard()
@@ -156,6 +138,7 @@ class MainActivity : AppCompatActivity() {
         }
         roundCount = 0
         playerTurn = PlayerTurn.PLAYER_1
+        valueFields= arrayOf(arrayOf(null,null,null),arrayOf(null,null,null),arrayOf(null,null,null))
     }
 
     private fun updateScore() {
@@ -166,7 +149,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun matchDrawn() {
-        Toast.makeText(applicationContext, "Match Draw!", Toast.LENGTH_SHORT).show()
          Snackbar.make(binding.root, "Match Draw!", Snackbar.LENGTH_LONG).show()
         clearBoard()
     }
