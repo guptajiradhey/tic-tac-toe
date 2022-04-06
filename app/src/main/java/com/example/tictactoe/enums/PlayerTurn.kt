@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.enums
 
 enum class PlayerTurn {
     PLAYER_1,
